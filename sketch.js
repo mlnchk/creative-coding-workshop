@@ -7,6 +7,9 @@ const settings = {
   dimensions: [2048, 2048],
 };
 
+random.setSeed(random.getRandomSeed());
+console.log(random.getSeed());
+
 const sketch = () => {
   const colorCount = random.rangeFloor(1, 6);
   const pallete = random.shuffle(random.pick(palletes)).slice(0, colorCount);
