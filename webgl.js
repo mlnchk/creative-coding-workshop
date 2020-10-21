@@ -4,8 +4,13 @@ require("three/examples/js/controls/OrbitControls");
 const canvasSketch = require("canvas-sketch");
 const random = require("canvas-sketch-util/random");
 const palettes = require("nice-color-palettes");
+const eases = require("eases");
+const BezierEasing = require("bezier-easing");
 
 const settings = {
+  dimentions: [512, 512],
+  fps: 24,
+  duration: 4,
   animate: true,
   context: "webgl",
   attributes: {
@@ -53,6 +58,8 @@ const sketch = ({ context }) => {
   light.position.set(0, 0, 4);
   scene.add(light);
 
+  const easeFn = BezierEasing(0.67, 0.03, 0.29, 0.99);
+
   return {
     resize({ pixelRatio, viewportWidth, viewportHeight }) {
       const aspect = viewportWidth / viewportHeight;
@@ -72,8 +79,11 @@ const sketch = ({ context }) => {
       camera.lookAt(new THREE.Vector3());
       camera.updateProjectionMatrix();
     },
-    render({ time }) {
-      // mesh.rotation.y = time * ((10 * Math.PI) / 100);
+    render({ time, playhead }) {
+      // scene.rotation.y = time * ((10 * Math.PI) / 100);
+      const t = Math.sin(playhead * Math.PI);
+      // scene.rotation.y = eases.expoInOut(t);
+      scene.rotation.y = easeFn(t);
       renderer.render(scene, camera);
     },
     unload() {

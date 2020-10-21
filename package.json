@@ -13,8 +13,10 @@
     "canvas-sketch-cli": "^1.11.9"
   },
   "dependencies": {
+    "bezier-easing": "^2.1.0",
     "canvas-sketch": "^0.7.4",
     "canvas-sketch-util": "^1.10.0",
+    "eases": "^1.0.8",
     "nice-color-palettes": "^3.0.0",
     "three": "^0.121.1"
   }
